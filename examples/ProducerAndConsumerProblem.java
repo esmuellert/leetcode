@@ -1,6 +1,7 @@
 package examples;
 
-import java.beans.PropertyDescriptor;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
@@ -19,104 +20,85 @@ public class ProducerAndConsumerProblem {
 
     private class Producer implements Runnable {
 
-        private int produce() {
+        private void produce() throws InterruptedException {
             lock.lock();
-            try {
-                int product = random.nextInt(PRODUCT_BOUND) + 1;
-                if (BUFFERS - buffer.size() < product) {
-                    System.out.println("Waiting for space.");
-                    while (BUFFERS - buffer.size() < product) {
-                        notFull.await();
-                    }
-                }
 
-                System.out.println(Thread.currentThread().getName() + " produce " + product + " products.");
-                for (int i = 0; i < product; i++) {
-                    buffer.put(product);
+            int product = random.nextInt(PRODUCT_BOUND) + 1;
+            if (BUFFERS - buffer.size() < product) {
+                System.out.println("Waiting for space.");
+                while (BUFFERS - buffer.size() < product) {
+                    notFull.await();
                 }
-                System.out.println(buffer.size() + " products in buffer");
-                notEmpty.signal();
-            } catch (InterruptedException e) {
-//                e.printStackTrace();
-                return 0;
-            } finally {
-                lock.unlock();
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+            System.out.println(Thread.currentThread().getName() + " produce " + product + " products.");
+            for (int i = 0; i < product; i++) {
+                buffer.put(product);
             }
-            return 1;
+            System.out.println(buffer.size() + " products in buffer");
+            notEmpty.signal();
+
+
         }
 
         @Override
         public void run() {
-            int status = 1;
-            while (!Thread.currentThread().isInterrupted() && status == 1) {
-                status = produce();
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    produce();
+                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+                    break;
+                } finally {
+                    lock.unlock();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    break;
+                }
             }
         }
     }
 
     private class Consumer implements Runnable {
 
-        private int consume() {
+        private void consume() throws InterruptedException {
             lock.lock();
-            try {
-                int consumption = random.nextInt(PRODUCT_BOUND) + 1;
-                if (buffer.size() < consumption) {
-                    System.out.println("Waiting for product.");
-                    while (buffer.size() < consumption) {
-                        notEmpty.await();
-                    }
+
+            int consumption = random.nextInt(PRODUCT_BOUND) + 1;
+            if (buffer.size() < consumption) {
+                System.out.println("Waiting for product.");
+                while (buffer.size() < consumption) {
+                    notEmpty.await();
                 }
-                System.out.println(Thread.currentThread().getName() + " consume " + consumption + " products.");
-                for (int i = 0; i < consumption; i++) {
-                    buffer.take();
-                }
-                System.out.println(buffer.size() + " products in buffer");
-                notFull.signal();
-            } catch (InterruptedException e) {
-//                e.printStackTrace();
-                return 0;
-            } finally {
-                lock.unlock();
             }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return 0;
+            System.out.println(Thread.currentThread().getName() + " consume " + consumption + " products.");
+            for (int i = 0; i < consumption; i++) {
+                buffer.take();
             }
-            return 1;
+            System.out.println(buffer.size() + " products in buffer");
+            notFull.signal();
+
         }
 
         @Override
         public void run() {
-            int status = 1;
-            while (!Thread.currentThread().isInterrupted() && status == 1) {
-                status = consume();
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    consume();
+                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+                    break;
+                } finally {
+                    lock.unlock();
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    break;
+                }
             }
-        }
-    }
-
-    private class Buffer {
-        private ArrayList<Integer> queue;
-
-        public Buffer(int size) {
-            queue = new ArrayList<>(size);
-        }
-
-        public void put(int n) throws InterruptedException {
-            queue.add(n);
-        }
-
-        public int take() throws InterruptedException {
-            return queue.remove(0);
-        }
-
-        public int size() {
-            return queue.size();
         }
     }
 
@@ -128,6 +110,27 @@ public class ProducerAndConsumerProblem {
         return new Consumer();
     }
 
+    private static class Buffer {
+        private final ArrayList<Integer> queue;
+
+        public Buffer(int size) {
+            queue = new ArrayList<>(size);
+        }
+
+        public void put(int n) {
+            queue.add(n);
+        }
+
+        public int take() {
+            return queue.remove(0);
+        }
+
+        public int size() {
+            return queue.size();
+        }
+    }
+
+
     public static void main(String[] args) {
         ProducerAndConsumerProblem pap = new ProducerAndConsumerProblem();
         Producer producer = pap.producer();
@@ -138,32 +141,20 @@ public class ProducerAndConsumerProblem {
 
         Thread[] consumers = new Thread[consumerNum];
         Thread[] producers = new Thread[producerNum];
+
         for (int i = 0; i < producerNum; i++) {
             producers[i] = new Thread(producer);
+            producers[i].start();
         }
 
         for (int i = 0; i < consumerNum; i++) {
             consumers[i] = new Thread(consumer);
+            consumers[i].start();
         }
 
-//        for (int i = 0; i < producerNum; i++) {
-//            producers[i].start();
-//        }
-//
-//        for (int i = 0; i < consumerNum; i++) {
-//            consumers[i].start();;
-//        }
-        producers[0].start();
-        consumers[0].start();
-        producers[1].start();
-        consumers[1].start();
-        producers[2].start();
-        consumers[2].start();
-        producers[3].start();
-        producers[4].start();
 
         try {
-            Thread.sleep(30000);
+            Thread.sleep(7000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -175,6 +166,12 @@ public class ProducerAndConsumerProblem {
         for (int i = 0; i < consumerNum; i++) {
             consumers[i].interrupt();
         }
-//        System.out.println("over");
     }
+
+//    @Test
+//    public void test() {
+//        for (int i = 0; i < 2; i++) {
+//            ProducerAndConsumerProblem.main(null);
+//        }
+//    }
 }
