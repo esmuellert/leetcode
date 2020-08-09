@@ -10,8 +10,28 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ProducerAndConsumerProblem {
 
+    private static class Buffer {
+        private final ArrayList<Integer> queue;
+
+        public Buffer(int size) {
+            queue = new ArrayList<>(size);
+        }
+
+        public void put(int n) {
+            queue.add(n);
+        }
+
+        public int take() {
+            return queue.remove(0);
+        }
+
+        public int size() {
+            return queue.size();
+        }
+    }
+
     private final int BUFFERS = 20;
-    private final int PRODUCT_BOUND = 2;
+    private final int PRODUCT_BOUND = 5;
     private final Random random = new Random();
     private final Lock lock = new ReentrantLock();
     private final Condition notFull = lock.newCondition();
@@ -110,25 +130,7 @@ public class ProducerAndConsumerProblem {
         return new Consumer();
     }
 
-    private static class Buffer {
-        private final ArrayList<Integer> queue;
 
-        public Buffer(int size) {
-            queue = new ArrayList<>(size);
-        }
-
-        public void put(int n) {
-            queue.add(n);
-        }
-
-        public int take() {
-            return queue.remove(0);
-        }
-
-        public int size() {
-            return queue.size();
-        }
-    }
 
 
     public static void main(String[] args) {
