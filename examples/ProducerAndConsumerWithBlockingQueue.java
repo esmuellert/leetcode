@@ -4,71 +4,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 
 public class ProducerAndConsumerWithBlockingQueue {
-
-    private final int BUFFERS = 50;
-
-    private final Buffer buffer = new Buffer(BUFFERS);
-
-    private class Producer implements Runnable {
-
-        private synchronized int produce() {
-
-            try {
-                if (buffer.size() == BUFFERS) {
-                    System.out.println("Waiting for space.");
-                }
-                buffer.put(BUFFERS);
-                System.out.println(Thread.currentThread().getName() + " produce " + 1 + " product.");
-                System.out.println(buffer.size() + " products in buffer");
-
-            } catch (InterruptedException e) {
-//                e.printStackTrace();
-                return 0;
-            }
-            return 1;
-        }
-
-        @Override
-        public void run() {
-            int status = 1;
-            while (!Thread.currentThread().isInterrupted() && status == 1) {
-                status = produce();
-            }
-        }
-    }
-
-    private class Consumer implements Runnable {
-
-        private synchronized int consume() {
-
-            try {
-                if (buffer.size() == 0) {
-                    System.out.println("Waiting for product.");
-                }
-                buffer.take();
-                System.out.println(Thread.currentThread().getName() + " consume " + 1 + " product.");
-                System.out.println(buffer.size() + " products in buffer");
-            } catch (InterruptedException e) {
-//                e.printStackTrace();
-                return 0;
-            }
-            return 1;
-        }
-
-        @Override
-        public void run() {
-            int status = 1;
-            while (!Thread.currentThread().isInterrupted() && status == 1) {
-                status = consume();
-            }
-        }
-    }
-
     private static class Buffer {
         private final ArrayBlockingQueue<Integer> queue;
 
         public Buffer(int size) {
-            queue = new ArrayBlockingQueue<>(size, true);
+            queue = new ArrayBlockingQueue<>(size);
         }
 
         public void put(int n) throws InterruptedException {
@@ -84,6 +24,68 @@ public class ProducerAndConsumerWithBlockingQueue {
         }
     }
 
+    private final int BUFFERS = 20;
+
+    private final Buffer buffer = new Buffer(BUFFERS);
+
+    private class Producer implements Runnable {
+
+        private synchronized void produce() throws InterruptedException {
+            if (buffer.size() == BUFFERS) {
+                System.out.println("Waiting for space.");
+            }
+            buffer.put(BUFFERS);
+            System.out.println(Thread.currentThread().getName() + " produce " + 1 + " product.");
+            System.out.println(buffer.size() + " products in buffer");
+        }
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    produce();
+                } catch (InterruptedException e) {
+                    break;
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private class Consumer implements Runnable {
+
+        private synchronized void consume() throws InterruptedException {
+            if (buffer.size() == 0) {
+                System.out.println("Waiting for product.");
+            }
+            buffer.take();
+            System.out.println(Thread.currentThread().getName() + " consume " + 1 + " product.");
+            System.out.println(buffer.size() + " products in buffer");
+        }
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    consume();
+                } catch (InterruptedException e) {
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        }
+    }
+
+
     public Producer producer() {
         return new Producer();
     }
@@ -94,31 +96,39 @@ public class ProducerAndConsumerWithBlockingQueue {
 
     public static void main(String[] args) {
         ProducerAndConsumerWithBlockingQueue pap = new ProducerAndConsumerWithBlockingQueue();
-        Producer producer = pap.producer();
-        Consumer consumer = pap.consumer();
+        Producer producer = pap.new Producer();
+        Consumer consumer = pap.new Consumer();
 
-        Thread producer_1 = new Thread(producer);
-        Thread producer_2 = new Thread(producer);
-        Thread consumer_1 = new Thread(consumer);
-        Thread consumer_2 = new Thread(consumer);
-        Thread producer_3 = new Thread(producer);
-        producer_1.start();
-        consumer_1.start();
-        producer_2.start();
-        consumer_2.start();
-        producer_3.start();
+        int producerNum = 4;
+        int consumerNum = 3;
+
+        Thread[] consumers = new Thread[consumerNum];
+        Thread[] producers = new Thread[producerNum];
+
+        for (int i = 0; i < producerNum; i++) {
+            producers[i] = new Thread(producer);
+            producers[i].start();
+        }
+
+        for (int i = 0; i < consumerNum; i++) {
+            consumers[i] = new Thread(consumer);
+            consumers[i].start();
+        }
+
 
         try {
-            Thread.sleep(100);
+            Thread.sleep(12000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        producer_3.interrupt();
-        producer_1.interrupt();
-        consumer_1.interrupt();
-        producer_2.interrupt();
-        consumer_2.interrupt();
-//        System.out.println("over");
+
+        for (int i = 0; i < producerNum; i++) {
+            producers[i].interrupt();
+        }
+
+        for (int i = 0; i < consumerNum; i++) {
+            consumers[i].interrupt();
+        }
     }
 }
 

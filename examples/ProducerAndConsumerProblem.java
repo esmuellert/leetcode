@@ -1,7 +1,5 @@
 package examples;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
@@ -131,12 +129,10 @@ public class ProducerAndConsumerProblem {
     }
 
 
-
-
     public static void main(String[] args) {
         ProducerAndConsumerProblem pap = new ProducerAndConsumerProblem();
-        Producer producer = pap.producer();
-        Consumer consumer = pap.consumer();
+        Producer producer = pap.new Producer();
+        Consumer consumer = pap.new Consumer();
 
         int producerNum = 5;
         int consumerNum = 3;
