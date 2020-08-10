@@ -31,7 +31,7 @@ public class SlidingWindowMax {
     private void add(ArrayDeque<Integer> queue, int n) {
         if (queue.isEmpty()) {
             queue.offer(n);
-        } else if (queue.peek() < n){
+        } else if (queue.peek() < n) {
             queue.clear();
             queue.offer(n);
         } else {
@@ -45,7 +45,7 @@ public class SlidingWindowMax {
     @Test
     public void test() {
         SlidingWindowMax swm = new SlidingWindowMax();
-        swm.maxSlidingWindow(new int[]{1,3,-1,-3,7,5,2,6}, 6);
+        swm.maxSlidingWindow(new int[]{1, 3, -1, -3, 7, 5, 2, 6}, 6);
 
     }
 }

@@ -1,12 +1,7 @@
 package leetcode;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
 public class CQueue {
     private Deque<Integer> stack;

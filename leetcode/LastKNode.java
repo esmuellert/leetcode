@@ -1,6 +1,6 @@
 package leetcode;
 
-public class lastKNode {
+public class LastKNode {
     public ListNode getKthFromEnd(ListNode head, int k) {
         if (head == null) {
             return null;

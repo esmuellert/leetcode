@@ -2,11 +2,13 @@ package leetcode;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 public class MoneyExchange {
     private int min;
+
     public int coinChange(int[] coins, int amount) {
         min = amount + 1;
         Arrays.sort(coins);
@@ -34,7 +36,7 @@ public class MoneyExchange {
     @Test
     public void test() {
         MoneyExchange me = new MoneyExchange();
-        int res = me.coinChange(new int[]{125,146,125,252,226,25,24,308,50}, 8402);
+        int res = me.coinChange(new int[]{125, 146, 125, 252, 226, 25, 24, 308, 50}, 8402);
         assertEquals(res, 20);
     }
 }

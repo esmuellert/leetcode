@@ -1,6 +1,6 @@
 package leetcode;
 
-public class mergeLinkedList {
+public class MergeLinkedList {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode sentinel = new ListNode(0);
         mergeHelper(sentinel, l1, l2);

@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.HashMap;
-
-public class findUniqChar {
+public class FindUniqChar {
     //    public char firstUniqChar(String s) {
 //        int[] frequency = new int[26];
 //        int rank = 1;

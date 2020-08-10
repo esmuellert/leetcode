@@ -1,6 +1,6 @@
 package leetcode;
 
-public class symmetricTree {
+public class SymmetricTree {
     public boolean isSymmetric(TreeNode root) {
         return symmetricHelper(root, root);
     }

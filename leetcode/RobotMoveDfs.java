@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public class robotMoveDfs {
+public class RobotMoveDfs {
     int count = 0;
     boolean[][] marked;
     int M, N, K;
@@ -71,7 +71,7 @@ public class robotMoveDfs {
 
     @Test
     public void test() {
-        robotMoveDfs rm = new robotMoveDfs();
+        RobotMoveDfs rm = new RobotMoveDfs();
         assertEquals(rm.movingCount(3, 5, 2), 6);
     }
 }

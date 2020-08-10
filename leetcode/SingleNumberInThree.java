@@ -25,6 +25,7 @@ public class SingleNumberInThree {
         }
         return res;
     }
+
     @Test
     public void test() {
         SingleNumberInThree snit = new SingleNumberInThree();

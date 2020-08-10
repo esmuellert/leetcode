@@ -2,9 +2,9 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
-public class subTree {
+public class SubTree {
     public boolean isSubStructure(TreeNode A, TreeNode B) {
         if (A == null || B == null) {
             return false;

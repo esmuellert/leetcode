@@ -32,10 +32,11 @@ public class LongestConsecutiveSequence {
         return res;
 
     }
+
     @Test
     public void test() {
         String s = "123";
-        String str = s.substring(3,3);
-        System.out.println("123".substring(3,3));
+        String str = s.substring(3, 3);
+        System.out.println("123".substring(3, 3));
     }
 }

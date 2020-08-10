@@ -2,13 +2,13 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
 
-public class robotMove {
+import static org.junit.Assert.assertEquals;
+
+public class RobotMove {
     private boolean[][] marked;
     private int M, N, K;
 
@@ -73,7 +73,7 @@ public class robotMove {
 
     @Test
     public void test() {
-        robotMove rm = new robotMove();
+        RobotMove rm = new RobotMove();
         assertEquals(rm.movingCount(11, 8, 16), 88);
     }
 }

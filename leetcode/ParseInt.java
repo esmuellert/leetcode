@@ -1,8 +1,10 @@
 package leetcode;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-public class parseInt {
+
+import static org.junit.Assert.assertTrue;
+
+public class ParseInt {
     public boolean isNumber(String s) {
         s = s.trim();
         if (s.length() == 0) {
@@ -15,16 +17,16 @@ public class parseInt {
             s = s + "0";
         }
         try {
-            double result =  Double.parseDouble(s);
-        }
-        catch(Exception e) {
+            double result = Double.parseDouble(s);
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
+
     @Test
     public void test() {
-        parseInt p = new parseInt();
+        ParseInt p = new ParseInt();
         assertTrue(p.isNumber(".1"));
     }
 }

@@ -1,9 +1,9 @@
 package leetcode;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class pathSum {
+public class PathSum {
     // private List<List<Integer>> res;
     // private int SUM;
     // public List<List<Integer>> leetcode.pathSum(leetcode.TreeNode root, int sum) {
@@ -53,6 +53,7 @@ public class pathSum {
     // }
     private List<List<Integer>> res;
     private int SUM;
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         res = new ArrayList<>();
         SUM = sum;
@@ -64,7 +65,7 @@ public class pathSum {
         return res;
     }
 
-    private boolean isLeaf (TreeNode node) {
+    private boolean isLeaf(TreeNode node) {
         return node.left == null && node.right == null;
     }
 

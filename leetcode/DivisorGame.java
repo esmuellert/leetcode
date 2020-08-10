@@ -1,8 +1,8 @@
 package leetcode;
 
-public class divisorGame {
+public class DivisorGame {
     public boolean divisorGame(int N) {
-        int win[] = new int[N + 1];
+        int[] win = new int[N + 1];
         return divisorGame(N, win);
     }
 

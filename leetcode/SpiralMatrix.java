@@ -4,10 +4,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class spiralMatrix {
+public class SpiralMatrix {
     public int[] spiralOrder(int[][] matrix) {
         int iFirst = 0;
         int iLast = matrix.length - 1;
@@ -15,7 +14,7 @@ public class spiralMatrix {
         int jLast = matrix[0].length - 1;
         int[] res = new int[matrix.length * matrix[0].length];
         int index = 0;
-        while(iLast >= iFirst && jLast >= jFirst && index < res.length) {
+        while (iLast >= iFirst && jLast >= jFirst && index < res.length) {
             for (int i = jFirst; i <= jLast; i++) {
                 res[index] = matrix[iFirst][i];
                 index++;
@@ -49,11 +48,12 @@ public class spiralMatrix {
         }
         return res;
     }
+
     @Test
     public void test() {
-        spiralMatrix sm = new spiralMatrix();
+        SpiralMatrix sm = new SpiralMatrix();
         int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
-        int[] res = {1,2,3,4,8,12,11,10,9,5,6,7};
+        int[] res = {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7};
         assertTrue(Arrays.equals(sm.spiralOrder(matrix), res));
     }
 }

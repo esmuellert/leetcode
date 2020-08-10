@@ -67,7 +67,7 @@ public class ThreeSum {
     public void test() {
 //        leetcode.ThreeSum ts = new leetcode.ThreeSum();
 //        ts.threeSum(new int[]{-1,0, 1});
-        int[] array = {1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0};
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         System.arraycopy(array, 0, array, 4, 9);
         System.out.println(array.toString());
     }

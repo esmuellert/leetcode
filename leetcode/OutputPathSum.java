@@ -31,9 +31,10 @@ public class OutputPathSum {
         pathHelper(root.right, sum - root.val);
         list.remove(list.size() - 1);
     }
+
     @Test
     public void test() {
         OutputPathSum ops = new OutputPathSum();
-        ops.pathSum(TreeNode.buildTreeFromArray(new int[]{5,4,8,11,0,13,4,7,2,0,0,5,1}), 22);
+        ops.pathSum(TreeNode.buildTreeFromArray(new int[]{5, 4, 8, 11, 0, 13, 4, 7, 2, 0, 0, 5, 1}), 22);
     }
 }

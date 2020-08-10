@@ -1,11 +1,11 @@
 package leetcode;
 
-import java.util.Queue;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-public class levelOrder {
+public class LevelOrder {
     public int[] levelOrder(TreeNode root) {
         if (root == null) {
             return new int[]{};

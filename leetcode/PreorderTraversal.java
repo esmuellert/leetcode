@@ -2,9 +2,10 @@ package leetcode;
 
 import org.junit.Test;
 
-import java.util.Stack;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class PreorderTraversal {
     // private List<Integer> res;
     // public List<Integer> preorderTraversal(leetcode.TreeNode root) {
@@ -31,16 +32,17 @@ public class PreorderTraversal {
                 stack.push(curr.right);
             } else if (curr.right == null && curr.left != null) {
                 stack.push(curr.left);
-            } else if (curr.right != null && curr.left != null){
+            } else if (curr.right != null && curr.left != null) {
                 stack.push(curr.right);
                 stack.push(curr.left);
             }
         }
         return res;
     }
+
     @Test
     public void test() {
         PreorderTraversal pt = new PreorderTraversal();
-        pt.preorderTraversal(TreeNode.buildTreeFromArray(new int[]{1,2,3}));
+        pt.preorderTraversal(TreeNode.buildTreeFromArray(new int[]{1, 2, 3}));
     }
 }

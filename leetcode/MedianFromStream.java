@@ -1,11 +1,15 @@
 package leetcode;
 
 import java.util.PriorityQueue;
-public class medianFromStream {
+
+public class MedianFromStream {
     private PriorityQueue<Integer> A;
     private PriorityQueue<Integer> B;
-    /** initialize your data structure here. */
-    public medianFromStream() {
+
+    /**
+     * initialize your data structure here.
+     */
+    public MedianFromStream() {
         A = new PriorityQueue<>((x, y) -> (y - x));
         B = new PriorityQueue<>();
     }

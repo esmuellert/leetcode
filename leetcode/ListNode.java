@@ -7,6 +7,7 @@ public class ListNode {
     ListNode(int x) {
         val = x;
     }
+
     public static ListNode buildLinkedListFromArray(int[] nums) {
         ListNode sentinel = new ListNode(-1);
         ListNode ptr = sentinel;

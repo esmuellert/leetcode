@@ -2,7 +2,7 @@ package leetcode;
 
 import org.junit.Test;
 
-public class minStack {
+public class MinStack {
 
     private class Node {
         int val;
@@ -22,7 +22,7 @@ public class minStack {
     /**
      * initialize your data structure here.
      */
-    public minStack() {
+    public MinStack() {
         sentinel = new Node(0, 0, null);
     }
 
@@ -53,8 +53,8 @@ public class minStack {
     }
 
     @Test
-    public void test () {
-        minStack ms = new minStack();
+    public void test() {
+        MinStack ms = new MinStack();
         ms.push(-2);
         ms.push(0);
         ms.push(-3);

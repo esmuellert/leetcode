@@ -2,13 +2,14 @@ package leetcode;
 
 import org.junit.Test;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class getLeastNumbers {
+public class GetLeastNumbers {
     private int[] res;
     private int[] array;
+
     public int[] getLeastNumbers(int[] arr, int k) {
         res = new int[k];
         array = arr;
@@ -48,7 +49,7 @@ public class getLeastNumbers {
         int pivot = start;
         int left = start + 1;
         int right = end;
-        while(!(left > right) && left <= end) {
+        while (!(left > right) && left <= end) {
             if (array[left] >= array[pivot] && array[right] <= array[pivot]) {
                 swap(left, right);
                 left++;
@@ -57,7 +58,7 @@ public class getLeastNumbers {
                 right--;
             } else if (array[right] <= array[pivot]) {
                 left++;
-            } else{
+            } else {
                 left++;
                 right--;
             }
@@ -74,7 +75,7 @@ public class getLeastNumbers {
 
     @Test
     public void test() {
-        getLeastNumbers gln = new getLeastNumbers();
+        GetLeastNumbers gln = new GetLeastNumbers();
         gln.getLeastNumbers(new int[]{0, 0, 2, 3, 2, 1, 1, 2, 0, 4}, 0);
     }
 }

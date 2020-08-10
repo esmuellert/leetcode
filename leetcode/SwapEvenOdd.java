@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class swapEvenOdd {
+public class SwapEvenOdd {
     public int[] exchange(int[] nums) {
         int evenPtr = 0;
         int oddPtr = nums.length - 1;
@@ -17,14 +17,15 @@ public class swapEvenOdd {
                 nums[evenPtr] = nums[oddPtr];
                 nums[oddPtr] = temp;
             }
-            evenPtr = nums[evenPtr] % 2 == 0? evenPtr : evenPtr + 1;
+            evenPtr = nums[evenPtr] % 2 == 0 ? evenPtr : evenPtr + 1;
             oddPtr = nums[oddPtr] % 2 == 0 ? oddPtr - 1 : oddPtr;
         }
         return nums;
     }
+
     @Test
     public void test() {
-        swapEvenOdd p = new swapEvenOdd();
+        SwapEvenOdd p = new SwapEvenOdd();
         int[] a = {1, 2, 3, 4};
         int[] b = {1, 3, 2, 4};
         assertEquals(Arrays.equals(p.exchange(a), b), true);

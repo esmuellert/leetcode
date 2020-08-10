@@ -2,9 +2,9 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class cutRope {
+public class CutRope {
     private int[] product;
     // public int cuttingRope(int n) {
     //     product = new int[n];
@@ -47,7 +47,7 @@ public class cutRope {
 
     @Test
     public void test() {
-        cutRope cr = new cutRope();
+        CutRope cr = new CutRope();
         assertEquals(cr.cuttingRope(6), 9);
     }
 }

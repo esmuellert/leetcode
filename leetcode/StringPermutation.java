@@ -3,10 +3,10 @@ package leetcode;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 
-public class stringPermutation {
+public class StringPermutation {
     private char[] ch;
     private List<String> list;
 
@@ -42,7 +42,7 @@ public class stringPermutation {
 
     @Test
     public void test() {
-        stringPermutation sp = new stringPermutation();
+        StringPermutation sp = new StringPermutation();
         sp.permutation("aab");
     }
 }

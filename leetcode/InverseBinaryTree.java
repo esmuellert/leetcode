@@ -1,6 +1,6 @@
 package leetcode;
 
-public class inverseBinaryTree {
+public class InverseBinaryTree {
     public TreeNode mirrorTree(TreeNode root) {
         if (root == null) {
             return null;

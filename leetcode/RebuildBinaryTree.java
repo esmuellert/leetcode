@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.HashMap;
 
-public class rebuildBinaryTree {
+public class RebuildBinaryTree {
     HashMap<Integer, Integer> map = new HashMap<>();
     int[] p;
 

@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class findRepeatNumber {
+public class FindRepeatNumber {
     public int finder(int[] nums) {
 //        Set<Integer> numbers = new HashSet<Integer>();
 //        for (int i = 0; i < nums.length ; i++) {

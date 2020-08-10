@@ -1,8 +1,10 @@
 package leetcode;
 
 import org.junit.Test;
+
 public class BinaryTreeDiameter {
     private int max;
+
     public int diameterOfBinaryTree(TreeNode root) {
         max = 0;
         diameterHelper(root);
@@ -18,6 +20,7 @@ public class BinaryTreeDiameter {
         max = Math.max(max, left + right);
         return Math.max(left, right) + 1;
     }
+
     @Test
     public void test() {
         BinaryTreeDiameter btd = new BinaryTreeDiameter();

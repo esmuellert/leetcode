@@ -27,9 +27,10 @@ public class PostorderTraversalIterative {
         }
         return res;
     }
+
     @Test
     public void test() {
         PostorderTraversalIterative pti = new PostorderTraversalIterative();
-        pti.postorderTraversal(TreeNode.buildTreeFromArray(new int[]{1,2,3}));
+        pti.postorderTraversal(TreeNode.buildTreeFromArray(new int[]{1, 2, 3}));
     }
 }

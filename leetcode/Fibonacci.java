@@ -2,9 +2,9 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
+
+import static org.junit.Assert.assertEquals;
 
 public class Fibonacci {
     private HashMap<Integer, Integer> map;

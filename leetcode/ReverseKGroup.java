@@ -2,7 +2,7 @@ package leetcode;
 
 import org.junit.Test;
 
-public class reverseKGroup {
+public class ReverseKGroup {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null) {
             return head;
@@ -54,7 +54,7 @@ public class reverseKGroup {
 
     @Test
     public void test() {
-        reverseKGroup rkg = new reverseKGroup();
+        ReverseKGroup rkg = new ReverseKGroup();
         ListNode head = ListNode.buildLinkedListFromArray(new int[]{1, 2, 3, 4, 5});
         rkg.reverseKGroup(head, 2);
     }

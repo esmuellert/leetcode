@@ -2,11 +2,11 @@ package leetcode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
-public class pathsInMatrix {
+import static org.junit.Assert.assertEquals;
+
+public class PathsInMatrix {
     boolean[][] marked;
     char[] words;
     char[][] map;
@@ -72,7 +72,7 @@ public class pathsInMatrix {
 
     @Test
     public void test() {
-        pathsInMatrix pim = new pathsInMatrix();
+        PathsInMatrix pim = new PathsInMatrix();
         char[][] board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'E', 'S'}, {'A', 'D', 'E', 'E'}};
         String word = "ABCESEEEFS";
         assertEquals(pim.exist(board, word), true);
