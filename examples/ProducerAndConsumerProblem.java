@@ -6,6 +6,11 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * This class implements producer-consumer problem using locks and condition variables.
+ *
+ * @author Yanuo Ma
+ */
 public class ProducerAndConsumerProblem {
 
     private static class Buffer {
@@ -24,6 +29,7 @@ public class ProducerAndConsumerProblem {
         }
 
         public int size() {
+
             return queue.size();
         }
     }
@@ -128,11 +134,9 @@ public class ProducerAndConsumerProblem {
         return new Consumer();
     }
 
-
-    public static void main(String[] args) {
-        ProducerAndConsumerProblem pap = new ProducerAndConsumerProblem();
-        Producer producer = pap.new Producer();
-        Consumer consumer = pap.new Consumer();
+    public void runner() {
+        Producer producer = new Producer();
+        Consumer consumer = new Consumer();
 
         int producerNum = 5;
         int consumerNum = 3;
@@ -164,6 +168,11 @@ public class ProducerAndConsumerProblem {
         for (int i = 0; i < consumerNum; i++) {
             consumers[i].interrupt();
         }
+    }
+
+    public static void main(String[] args) {
+        ProducerAndConsumerProblem pap = new ProducerAndConsumerProblem();
+        pap.runner();
     }
 
 //    @Test

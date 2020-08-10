@@ -2,7 +2,11 @@ package examples;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-
+/**
+ * This class implements producer-consumer problem using java.util.concurrent.ArrayBlockingQueue.
+ *
+ * @author Yanuo Ma
+ */
 public class ProducerAndConsumerWithBlockingQueue {
     private static class Buffer {
         private final ArrayBlockingQueue<Integer> queue;
@@ -94,10 +98,9 @@ public class ProducerAndConsumerWithBlockingQueue {
         return new Consumer();
     }
 
-    public static void main(String[] args) {
-        ProducerAndConsumerWithBlockingQueue pap = new ProducerAndConsumerWithBlockingQueue();
-        Producer producer = pap.new Producer();
-        Consumer consumer = pap.new Consumer();
+    public void runner() {
+        Producer producer = new Producer();
+        Consumer consumer = new Consumer();
 
         int producerNum = 4;
         int consumerNum = 3;
@@ -129,6 +132,11 @@ public class ProducerAndConsumerWithBlockingQueue {
         for (int i = 0; i < consumerNum; i++) {
             consumers[i].interrupt();
         }
+    }
+
+    public static void main(String[] args) {
+        ProducerAndConsumerWithBlockingQueue pap = new ProducerAndConsumerWithBlockingQueue();
+        pap.runner();
     }
 }
 
